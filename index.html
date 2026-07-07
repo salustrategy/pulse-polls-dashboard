@@ -1,0 +1,1511 @@
+<title>Pulse Polls — Painel de Pesquisas 2026</title>
+<style>
+  :root {
+    --bg: #eef0ec;
+    --surface: #ffffff;
+    --surface-2: #e3e6e0;
+    --ink: #1b232b;
+    --ink-soft: #5b6670;
+    --ink-faint: #8993a0;
+    --line: #d3d7d0;
+    --accent: #2f6f6b;
+    --accent-ink: #ffffff;
+    --accent-soft: #dbe9e6;
+    --i-atlas: #3b5ba5;
+    --i-parana: #b5622c;
+    --i-ipsos: #6e4a9e;
+    --i-quaest: #1e7a5c;
+    --i-atlas-soft: #e4eaf6;
+    --i-parana-soft: #f6e7db;
+    --i-ipsos-soft: #ece4f4;
+    --i-quaest-soft: #dfeee6;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #11161b;
+      --surface: #1a2129;
+      --surface-2: #232b34;
+      --ink: #e8eae4;
+      --ink-soft: #a6b0b9;
+      --ink-faint: #6d7680;
+      --line: #2d3640;
+      --accent: #5aa39d;
+      --accent-ink: #0d1512;
+      --accent-soft: #1e3230;
+      --i-atlas: #7fa1e0;
+      --i-parana: #dd935e;
+      --i-ipsos: #ab8bdb;
+      --i-quaest: #57bb92;
+      --i-atlas-soft: #212d42;
+      --i-parana-soft: #3a2a1e;
+      --i-ipsos-soft: #2d2440;
+      --i-quaest-soft: #1c3329;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11161b;
+    --surface: #1a2129;
+    --surface-2: #232b34;
+    --ink: #e8eae4;
+    --ink-soft: #a6b0b9;
+    --ink-faint: #6d7680;
+    --line: #2d3640;
+    --accent: #5aa39d;
+    --accent-ink: #0d1512;
+    --accent-soft: #1e3230;
+    --i-atlas: #7fa1e0;
+    --i-parana: #dd935e;
+    --i-ipsos: #ab8bdb;
+    --i-quaest: #57bb92;
+    --i-atlas-soft: #212d42;
+    --i-parana-soft: #3a2a1e;
+    --i-ipsos-soft: #2d2440;
+    --i-quaest-soft: #1c3329;
+    color-scheme: dark;
+  }
+  :root[data-theme="light"] {
+    --bg: #eef0ec;
+    --surface: #ffffff;
+    --surface-2: #e3e6e0;
+    --ink: #1b232b;
+    --ink-soft: #5b6670;
+    --ink-faint: #8993a0;
+    --line: #d3d7d0;
+    --accent: #2f6f6b;
+    --accent-ink: #ffffff;
+    --accent-soft: #dbe9e6;
+    --i-atlas: #3b5ba5;
+    --i-parana: #b5622c;
+    --i-ipsos: #6e4a9e;
+    --i-quaest: #1e7a5c;
+    --i-atlas-soft: #e4eaf6;
+    --i-parana-soft: #f6e7db;
+    --i-ipsos-soft: #ece4f4;
+    --i-quaest-soft: #dfeee6;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.45;
+  }
+  .mono { font-family: ui-monospace, "JetBrains Mono", SFMono-Regular, Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  header.masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .masthead-title {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .masthead-sub {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-top: 4px;
+  }
+  .masthead-meta {
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+  .masthead-meta strong { color: var(--ink); display: block; font-size: 0.95rem; }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .stat-tile {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-tile::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--stripe, var(--accent));
+  }
+  .stat-tile .num { font-size: 1.7rem; font-weight: 700; font-family: ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  .stat-tile .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); margin-top: 2px; }
+
+  .filters-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 26px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .filter-row + .filter-row { padding-top: 10px; border-top: 1px solid var(--line); }
+  .filter-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    margin-right: 4px;
+    flex-shrink: 0;
+    min-width: 76px;
+  }
+  .chip-group { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+    border-radius: 999px;
+    padding: 6px 13px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.12s ease;
+    font-weight: 600;
+  }
+  .chip:hover { border-color: var(--chip-color, var(--accent)); }
+  .chip.active {
+    background: var(--chip-color, var(--accent));
+    border-color: var(--chip-color, var(--accent));
+    color: #fff;
+  }
+  .chip[data-inst="Atlas Intel"] { --chip-color: var(--i-atlas); }
+  .chip[data-inst="Paraná Pesquisas"] { --chip-color: var(--i-parana); }
+  .chip[data-inst="IPSOS IPEC"] { --chip-color: var(--i-ipsos); }
+  .chip[data-inst="Genial Quaest"] { --chip-color: var(--i-quaest); }
+
+  .uf-select {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 6px 30px 6px 13px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--ink-faint) 50%), linear-gradient(135deg, var(--ink-faint) 50%, transparent 50%);
+    background-position: calc(100% - 16px) center, calc(100% - 11px) center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+  .uf-select:hover { border-color: var(--accent); }
+
+  .clear-btn {
+    border: none;
+    background: none;
+    color: var(--ink-faint);
+    font-size: 0.78rem;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 4px 0;
+    margin-left: auto;
+  }
+  .clear-btn:hover { color: var(--accent); }
+
+  .month-group { margin-bottom: 8px; }
+  .month-heading {
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 30px 0 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .month-heading .count { font-size: 0.75rem; font-weight: 400; color: var(--ink-faint); font-family: ui-monospace, monospace; }
+  .month-heading::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+  .poll-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--card-color, var(--accent));
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+  }
+  .poll-card[data-inst="Atlas Intel"] { --card-color: var(--i-atlas); }
+  .poll-card[data-inst="Paraná Pesquisas"] { --card-color: var(--i-parana); }
+  .poll-card[data-inst="IPSOS IPEC"] { --card-color: var(--i-ipsos); }
+  .poll-card[data-inst="Genial Quaest"] { --card-color: var(--i-quaest); }
+
+  .poll-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .badge-inst {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 5px;
+    background: var(--badge-soft, var(--accent-soft));
+    color: var(--card-color, var(--accent));
+  }
+  .poll-card[data-inst="Atlas Intel"] .badge-inst { --badge-soft: var(--i-atlas-soft); }
+  .poll-card[data-inst="Paraná Pesquisas"] .badge-inst { --badge-soft: var(--i-parana-soft); }
+  .poll-card[data-inst="IPSOS IPEC"] .badge-inst { --badge-soft: var(--i-ipsos-soft); }
+  .poll-card[data-inst="Genial Quaest"] .badge-inst { --badge-soft: var(--i-quaest-soft); }
+
+  .badge-scope {
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+  .poll-date {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    font-family: ui-monospace, monospace;
+    white-space: nowrap;
+  }
+  .poll-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 6px 0 3px;
+    text-wrap: balance;
+  }
+  .poll-tema { font-size: 0.82rem; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+  .poll-resumo { font-size: 0.92rem; color: var(--ink-soft); max-width: 68ch; margin-bottom: 10px; }
+  .poll-links { display: flex; gap: 14px; }
+  .poll-links a {
+    font-size: 0.82rem;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--card-color, var(--accent));
+    padding-bottom: 1px;
+  }
+  .poll-links a:hover { color: var(--card-color, var(--accent)); }
+  .poll-links a:focus-visible, .chip:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .poll-links .na { font-size: 0.82rem; color: var(--ink-faint); font-style: italic; }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--ink-faint);
+    font-size: 0.95rem;
+  }
+
+  footer.foot {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 0.76rem;
+    color: var(--ink-faint);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 600px) {
+    .masthead-title { font-size: 1.8rem; }
+    .masthead-meta { text-align: left; }
+    header.masthead { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <h1 class="masthead-title">Pulse Polls</h1>
+      <div class="masthead-sub">Pesquisas de opinião pública no Brasil &mdash; ciclo 2026</div>
+    </div>
+    <div class="masthead-meta">
+      <strong id="lastSync">—</strong>
+      última sincronização
+    </div>
+  </header>
+
+  <div class="stats-row" id="statsRow"></div>
+
+  <div class="filters-panel">
+    <div class="filter-row">
+      <span class="filter-label">Instituto</span>
+      <div class="chip-group" id="filterInstituto"></div>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">Mês</span>
+      <div class="chip-group" id="filterMes"></div>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">Abrangência</span>
+      <div class="chip-group" id="filterAbrangencia"></div>
+      <select class="uf-select" id="filterUF">
+        <option value="">Todas as UFs</option>
+      </select>
+      <button class="clear-btn" id="clearFilters">Limpar filtros</button>
+    </div>
+  </div>
+
+  <main id="feed"></main>
+
+  <footer class="foot">
+    <span>Fontes oficiais: Atlas Intel · Paraná Pesquisas · IPSOS IPEC · Genial Quaest</span>
+    <span id="totalFoot"></span>
+  </footer>
+</div>
+
+<script>
+const DATA = {
+  "last_sync": "2026-07-07T23:17:16.057Z",
+  "pesquisas": [
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-01-21",
+      "data_levantamento": "2026-01-15",
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Brazil: National",
+      "tema": "Intenção de Votos",
+      "resumo": "Cenários eleitorais de primeiro e segundo turno para a eleição presidencial de 2026, amostra de 5.418 respondentes.",
+      "link_publicacao": "https://atlasintel.org/poll/brazil-national-2026-01-21",
+      "link_relatorio": "https://cdn.atlasintel.org/3c002592-c58c-480d-8ba6-58c2af96f65b.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.01 - Nacional - Intenção de Votos",
+      "adicionado_em": "2026-07-07T22:37:38.830Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-04-02",
+      "data_levantamento": "2026-03-25",
+      "abrangencia": "Estadual",
+      "uf": "PR",
+      "municipio": null,
+      "titulo": "Brazil: Paraná",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Aprovação de líderes e preferências eleitorais no Paraná, amostra de 1.254 respondentes, margem de erro de 3%.",
+      "link_publicacao": "https://www.atlasintel.org/poll/brazil-parana-2026-04-02",
+      "link_relatorio": "https://cdn.atlasintel.org/8842d268-eea7-472b-9b3a-0f1f799e72e9.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.04 - Estadual PR - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T22:37:38.831Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-05-15",
+      "data_levantamento": "2026-05-08",
+      "abrangencia": "Estadual",
+      "uf": "MA",
+      "municipio": null,
+      "titulo": "Brazil: Maranhão",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Aprovação presidencial e governamental e intenção de voto no Maranhão, amostra de 1.180 respondentes.",
+      "link_publicacao": "https://atlasintel.org/poll/brazil-maranhao-2026-05-15",
+      "link_relatorio": "https://cdn.atlasintel.org/ea3e6184-a9b9-4e4d-adae-8f55a0fb63e5.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.05 - Estadual MA - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T22:37:38.831Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-06-15",
+      "data_levantamento": "2026-06-09",
+      "abrangencia": "Estadual",
+      "uf": "CE",
+      "municipio": null,
+      "titulo": "Brazil: Ceará | Pesquisa Atlas/Focus",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Aprovação de autoridades e preferências eleitorais no Ceará, amostra de 1.223 respondentes, margem de erro de 3%.",
+      "link_publicacao": "https://atlasintel.org/poll/brazil-ceara-pesquisa-atlas-focus-2026-06-15",
+      "link_relatorio": "https://cdn.atlasintel.org/e8fdc76c-533d-4a1f-bfc0-41537d71a752.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.06 - Estadual CE - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T22:37:38.831Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-07-07",
+      "data_levantamento": "2026-07",
+      "abrangencia": "Estadual",
+      "uf": "PR",
+      "municipio": null,
+      "titulo": "Paraná Pesquisas divulga pesquisa no Estado do Paraná – Registro TSE n.º PR-01166/2026",
+      "tema": "Executivo Estadual e Legislativo Federal",
+      "resumo": "Situação eleitoral para o Executivo Estadual e Legislativo Federal no Paraná em 2026.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-registra-pesquisa-no-estado-do-parana-para-os-cargos-de-governador-e-senador-registro-tse-n-o-pr-01166-2026-julho-2026/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/07/PR_Jul26.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.07 - Estadual PR - Executivo Estadual e Legislativo Federal",
+      "adicionado_em": "2026-07-07T22:37:38.831Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-07-01",
+      "data_levantamento": "2026-06",
+      "abrangencia": "Estadual",
+      "uf": "BA",
+      "municipio": null,
+      "titulo": "Paraná Pesquisas divulga pesquisa no Estado da Bahia – Registro TSE n.º BA-04848/2026",
+      "tema": "Executivo Estadual e Legislativo Federal",
+      "resumo": "Situação eleitoral para o Executivo Estadual e Legislativo Federal na Bahia e avaliação da administração estadual em 2026.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-registra-pesquisa-no-estado-da-bahia-para-os-cargos-de-governador-e-senador-registro-tse-n-o-ba-04848-2026-julho-2026/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/07/BA_Jun26-1.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.07 - Estadual BA - Executivo Estadual e Legislativo Federal",
+      "adicionado_em": "2026-07-07T22:37:38.831Z"
+    },
+    {
+      "instituto": "IPSOS IPEC",
+      "data_publicacao": "2026-06-22",
+      "data_levantamento": "2026-06-13",
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Avaliação da Atuação do Governo Federal - Junho 2026",
+      "tema": "Avaliação do Governo Lula",
+      "resumo": "Indicadores negativos do governo Lula predominam, apesar de ligeira melhora na avaliação regular em relação a março.",
+      "link_publicacao": "https://www.ipsos.com/pt-br/avaliacao-da-atuacao-do-governo-federal-junho-2026",
+      "link_relatorio": "https://www.ipsos.com/sites/default/files/ct/publication/documents/2026-06/Ipsos_Ipec_Avaliação%20do%20Governo%20Federal_junho.pdf",
+      "nome_padronizado": "IPSOS IPEC - 2026.06 - Nacional - Avaliação do Governo Lula",
+      "adicionado_em": "2026-07-07T22:37:38.831Z"
+    },
+    {
+      "instituto": "IPSOS IPEC",
+      "data_publicacao": "2026-06-03",
+      "data_levantamento": "2026-05-28",
+      "abrangencia": "Estadual",
+      "uf": "CE",
+      "municipio": null,
+      "titulo": "A quatro meses da eleição, disputa pelo governo do Ceará tem Ciro Gomes com 44% e Elmano de Freitas com 33% das intenções de voto",
+      "tema": "Intenção de Voto para Governador",
+      "resumo": "Ciro Gomes lidera a disputa pelo governo do Ceará com 44%, seguido por Elmano de Freitas com 33%.",
+      "link_publicacao": "https://www.ipsos.com/pt-br/disputa-pelo-governo-do-ceara",
+      "link_relatorio": "https://www.ipsos.com/sites/default/files/ct/publication/documents/2026-06/26_044272_Ceara_Relatorio_de_tabelas_Completo.pdf",
+      "nome_padronizado": "IPSOS IPEC - 2026.06 - Estadual CE - Intenção de Voto para Governador",
+      "adicionado_em": "2026-07-07T22:37:38.831Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-05-13",
+      "data_levantamento": "2026-05-08",
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Genial/Quaest: a movimentação na avaliação do governo Lula e o cenário eleitoral para 2026",
+      "tema": "Avaliação de Governo e Cenário Eleitoral",
+      "resumo": "Aprovação de Lula sobe de 43% para 46%, com empate técnico contra Flávio Bolsonaro em segundo turno.",
+      "link_publicacao": "https://quaest.com.br/pesquisa-genial-quaest-maio-2026-governo-lula/",
+      "link_relatorio": null,
+      "nome_padronizado": "Genial Quaest - 2026.05 - Nacional - Avaliação de Governo e Cenário Eleitoral",
+      "adicionado_em": "2026-07-07T22:37:38.831Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-03-25",
+      "data_levantamento": "2026-03-18",
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Brazil: National",
+      "tema": "Intenção de Votos",
+      "resumo": "Cenários eleitorais de primeiro e segundo turno para a eleição presidencial de 2026, amostra de 5.028 respondentes.",
+      "link_publicacao": "https://atlasintel.org/poll/brazil-national-2026-03-25",
+      "link_relatorio": "https://cdn.atlasintel.org/a784fd27-de70-44b7-aa39-8638818101a6.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.03 - Nacional - Intenção de Votos",
+      "adicionado_em": "2026-07-07T22:38:21.130Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-07-02",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Percepções e impacto do vídeo de Michelle Bolsonaro",
+      "tema": "Impacto Político de Vídeo Divulgado",
+      "resumo": "Pesquisa sobre a repercussão e o impacto político do vídeo divulgado por Michelle Bolsonaro.",
+      "link_publicacao": "https://cdn.atlasintel.org/7fac735b-ea8f-49c2-9ec0-44a596b7ab64.pdf",
+      "link_relatorio": "https://cdn.atlasintel.org/7fac735b-ea8f-49c2-9ec0-44a596b7ab64.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.07 - Nacional - Impacto Político de Vídeo Divulgado",
+      "adicionado_em": "2026-07-07T22:42:50.570Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-07-02",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Investigações sobre Jaques Wagner e o Banco Master",
+      "tema": "Percepções sobre Investigações Políticas",
+      "resumo": "Pesquisa sobre a percepção pública das investigações envolvendo Jaques Wagner e o Banco Master.",
+      "link_publicacao": "https://cdn.atlasintel.org/0ecbc0ea-f471-4928-abfc-f34fa1ee8791.pdf",
+      "link_relatorio": "https://cdn.atlasintel.org/0ecbc0ea-f471-4928-abfc-f34fa1ee8791.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.07 - Nacional - Percepções sobre Investigações Políticas",
+      "adicionado_em": "2026-07-07T22:42:50.571Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-06-03",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Classificação de Facções como Organizações Terroristas",
+      "tema": "Classificação de Organizações Criminosas",
+      "resumo": "Pesquisa sobre a opinião pública a respeito de classificar facções criminosas como organizações terroristas.",
+      "link_publicacao": "https://cdn.atlasintel.org/0ba274a9-6a8f-4d1c-a933-93a808a2ced6.pdf",
+      "link_relatorio": "https://cdn.atlasintel.org/0ba274a9-6a8f-4d1c-a933-93a808a2ced6.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.06 - Nacional - Classificação de Organizações Criminosas",
+      "adicionado_em": "2026-07-07T22:42:50.571Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-05-15",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "FIFA's World Cup - Popular Perception and Consumer Habits",
+      "tema": "Percepção e Hábitos de Consumo sobre a Copa do Mundo",
+      "resumo": "Pesquisa sobre percepção popular e hábitos de consumo dos brasileiros relacionados à Copa do Mundo.",
+      "link_publicacao": "https://cdn.atlasintel.org/b96b87e7-6440-4c88-ae5c-3cf01855818a.pdf",
+      "link_relatorio": "https://cdn.atlasintel.org/b96b87e7-6440-4c88-ae5c-3cf01855818a.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.05 - Nacional - Percepção e Hábitos de Consumo sobre a Copa do Mundo",
+      "adicionado_em": "2026-07-07T22:42:50.571Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-04-23",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Protein Products - Consumer Habits",
+      "tema": "Hábitos de Consumo de Produtos Proteicos",
+      "resumo": "Pesquisa sobre hábitos de consumo de produtos proteicos entre os brasileiros.",
+      "link_publicacao": "https://cdn.atlasintel.org/0905db0c-fa1f-4eb2-808c-8da5925c326e.pdf",
+      "link_relatorio": "https://cdn.atlasintel.org/0905db0c-fa1f-4eb2-808c-8da5925c326e.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.04 - Nacional - Hábitos de Consumo de Produtos Proteicos",
+      "adicionado_em": "2026-07-07T22:42:50.571Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-04-01",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Easter Consumer Habits",
+      "tema": "Hábitos de Consumo na Páscoa",
+      "resumo": "Pesquisa sobre hábitos de consumo dos brasileiros relacionados à Páscoa.",
+      "link_publicacao": "https://cdn.atlasintel.org/2403d217-a186-46ac-8917-e4de974fee0e.pdf",
+      "link_relatorio": "https://cdn.atlasintel.org/2403d217-a186-46ac-8917-e4de974fee0e.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.04 - Nacional - Hábitos de Consumo na Páscoa",
+      "adicionado_em": "2026-07-07T22:42:50.571Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-05-19",
+      "data_levantamento": "2026-05-13",
+      "abrangencia": "Estadual",
+      "uf": "PI",
+      "municipio": null,
+      "titulo": "Brazil: Piauí",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Aprovação de líderes e preferências eleitorais no Piauí, amostra de 1.240 respondentes.",
+      "link_publicacao": "https://atlasintel.org/poll/brazil-piaui-2026-05-19",
+      "link_relatorio": "https://cdn.atlasintel.org/977c3ca6-beed-4ffc-a3dd-36b2dd6e5f83.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.05 - Estadual PI - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T22:42:50.571Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-05-15",
+      "data_levantamento": "2026-05-05",
+      "abrangencia": "Estadual",
+      "uf": "AM",
+      "municipio": null,
+      "titulo": "Brazil: Amazonas",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Aprovação e intenção de voto para as eleições de 2026 no Amazonas, amostra de 1.244 respondentes, margem de erro de 3%.",
+      "link_publicacao": "https://atlasintel.org/poll/brazil-amazonas-2026-05-15",
+      "link_relatorio": "https://cdn.atlasintel.org/9563fe5b-b18e-46ae-9849-1b05bfbec3f1.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.05 - Estadual AM - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T22:42:50.571Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-04-01",
+      "data_levantamento": "2026-03-25",
+      "abrangencia": "Estadual",
+      "uf": "MG",
+      "municipio": null,
+      "titulo": "Brazil: Minas Gerais",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Aprovação de líderes e preferências eleitorais em Minas Gerais, amostra de 2.195 respondentes, margem de erro de 2%.",
+      "link_publicacao": "https://atlasintel.org/poll/brazil-minas-gerais-2026-04-01",
+      "link_relatorio": "https://cdn.atlasintel.org/20fcff26-a5ad-4a82-9137-219beabe7eaf.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.04 - Estadual MG - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T22:42:50.571Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-04-01",
+      "data_levantamento": "2026-03-25",
+      "abrangencia": "Estadual",
+      "uf": "SC",
+      "municipio": null,
+      "titulo": "Brazil: Santa Catarina",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Intenção de voto para as eleições de 2026 em Santa Catarina, amostra de 1.280 respondentes, margem de erro de 3%.",
+      "link_publicacao": "https://atlasintel.org/poll/brazil-santa-catarina-2026-04-01",
+      "link_relatorio": "https://cdn.atlasintel.org/0f061b50-bce3-4036-bd96-c0f4abcd8d71.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.04 - Estadual SC - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T22:42:50.571Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-04-01",
+      "data_levantamento": "2026-03-23",
+      "abrangencia": "Estadual",
+      "uf": "AP",
+      "municipio": null,
+      "titulo": "Brazil: Amapá",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Aprovação de líderes e preferências eleitorais no Amapá, amostra de 1.029 respondentes, margem de erro de 3%.",
+      "link_publicacao": "https://atlasintel.org/poll/brazil-amapa-2026-04-01",
+      "link_relatorio": "https://cdn.atlasintel.org/edb991d9-62fe-4f3a-a545-1f6150136a29.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.04 - Estadual AP - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T22:42:50.571Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-03-18",
+      "data_levantamento": "2026-03-11",
+      "abrangencia": "Estadual",
+      "uf": "AM",
+      "municipio": null,
+      "titulo": "Brazil: Amazonas",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Aprovação de autoridades e preferências eleitorais no Amazonas, amostra de 1.138 respondentes, margem de erro de 3%.",
+      "link_publicacao": "https://atlasintel.org/poll/brazil-amazonas-2026-03-18",
+      "link_relatorio": "https://cdn.atlasintel.org/d0973f7b-78c6-4741-89e5-4d9dffc722e0.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.03 - Estadual AM - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T22:42:50.571Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-03-18",
+      "data_levantamento": "2026-03-11",
+      "abrangencia": "Estadual",
+      "uf": "PI",
+      "municipio": null,
+      "titulo": "Brazil: Piauí",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Pesquisa de opinião com 1.208 respondentes sobre aprovação e preferências eleitorais no Piauí, margem de erro de 3%.",
+      "link_publicacao": "https://atlasintel.org/poll/brazil-piaui-2026-03-18",
+      "link_relatorio": "https://cdn.atlasintel.org/b3d7cc7e-b6e4-4ffb-b7bb-c847004fd33e.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.03 - Estadual PI - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T22:42:50.571Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-07-01",
+      "data_levantamento": "2026-06-26",
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Brazil: National",
+      "tema": "Intenção de Votos",
+      "resumo": "Cenários eleitorais de primeiro e segundo turno para a eleição presidencial de 2026, amostra de 4.999 respondentes.",
+      "link_publicacao": "https://www.atlasintel.org/poll/brazil-national-2026-07-01",
+      "link_relatorio": "https://cdn.atlasintel.org/b159700b-b944-4193-8483-c31e82e0ca01.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.07 - Nacional - Intenção de Votos",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-06-22",
+      "data_levantamento": "2026-06-16",
+      "abrangencia": "Estadual",
+      "uf": "PI",
+      "municipio": null,
+      "titulo": "Brazil: PIAUÍ | Pesquisa Atlas/MeioNorte",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Aprovação presidencial e governamental e intenção de voto no Piauí, amostra de 1.197 respondentes.",
+      "link_publicacao": "https://www.atlasintel.org/poll/brazil-piaui-pesquisa-atlas-meionorte-2026-06-22",
+      "link_relatorio": "https://cdn.atlasintel.org/94b3e706-f2a3-42c0-a14e-58d06a10a7ee.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.06 - Estadual PI - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-05-29",
+      "data_levantamento": "2026-05-22",
+      "abrangencia": "Estadual",
+      "uf": "RN",
+      "municipio": null,
+      "titulo": "Brazil: Rio Grande do Norte | Pesquisa Atlas/94FM",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Aprovação presidencial e governamental e intenção de voto no Rio Grande do Norte, amostra de 962 respondentes.",
+      "link_publicacao": "https://www.atlasintel.org/poll/brazil-rio-grande-do-norte-2026-05-29",
+      "link_relatorio": "https://cdn.atlasintel.org/3f33515c-5555-4f4d-a98e-ceeecb4dca27.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.05 - Estadual RN - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-04-28",
+      "data_levantamento": "2026-04-22",
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Brazil: National",
+      "tema": "Intenção de Votos",
+      "resumo": "Cenários eleitorais de primeiro e segundo turno para a eleição presidencial de 2026, amostra de 5.008 respondentes.",
+      "link_publicacao": "https://www.atlasintel.org/poll/brazil-national-2026-04-28",
+      "link_relatorio": "https://cdn.atlasintel.org/3fd1843d-39fa-4b43-b852-fe68cf4d094c.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.04 - Nacional - Intenção de Votos",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-04-01",
+      "data_levantamento": "2026-03-25",
+      "abrangencia": "Estadual",
+      "uf": "CE",
+      "municipio": null,
+      "titulo": "Brazil: Ceará",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Aprovação presidencial e gubernatorial e intenção de voto no Ceará, amostra de 1.205 respondentes, margem de erro de 3%.",
+      "link_publicacao": "https://www.atlasintel.org/poll/brazil-ceara-2026-04-01",
+      "link_relatorio": "https://cdn.atlasintel.org/311b138e-6328-47c2-9998-dc5f900e4a71.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.04 - Estadual CE - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-04-01",
+      "data_levantamento": "2026-03-24",
+      "abrangencia": "Estadual",
+      "uf": "SP",
+      "municipio": null,
+      "titulo": "Brazil: São Paulo | Atlas-Estadão Poll | Presidential Election in São Paulo",
+      "tema": "Intenção de Voto para Presidente",
+      "resumo": "Preferências eleitorais para a eleição presidencial de 2026 entre eleitores de São Paulo, amostra de 2.254 respondentes.",
+      "link_publicacao": "https://www.atlasintel.org/poll/brazil-sao-paulo-atlas-estadao-poll-presidential-election-in-sao-paulo-2026-04-01",
+      "link_relatorio": "https://cdn.atlasintel.org/438a13b1-33d6-48b8-bf5d-e78423817485.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.04 - Estadual SP - Intenção de Voto para Presidente",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-04-01",
+      "data_levantamento": "2026-03-16",
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Brazil: Atlas-Arko Poll | Raízes da rejeição",
+      "tema": "Rejeição Política",
+      "resumo": "Pesquisa sobre as razões subjacentes à rejeição dos brasileiros em relação a líderes políticos, amostra de 4.224 respondentes.",
+      "link_publicacao": "https://www.atlasintel.org/poll/brazil-atlas-arko-poll-roots-of-rejection-2026-04-01",
+      "link_relatorio": "https://cdn.atlasintel.org/d78cf017-cd52-4712-a6fc-6b9e66e7b802.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.04 - Nacional - Rejeição Política",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-03-31",
+      "data_levantamento": "2026-03-24",
+      "abrangencia": "Estadual",
+      "uf": "SP",
+      "municipio": null,
+      "titulo": "Brazil: São Paulo | Atlas-Estadão Poll | Senado de São Paulo",
+      "tema": "Intenção de Voto para Senado",
+      "resumo": "Preferências eleitorais para o Senado de São Paulo em 2026, amostra de 2.254 respondentes, margem de erro de 2%.",
+      "link_publicacao": "https://www.atlasintel.org/poll/brazil-sao-paulo-atlas-estadao-poll-senado-de-sao-paulo-2026-03-31",
+      "link_relatorio": "https://cdn.atlasintel.org/42237696-d2c5-49b8-875d-6c204b29455e.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.03 - Estadual SP - Intenção de Voto para Senado",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-03-30",
+      "data_levantamento": "2026-03-24",
+      "abrangencia": "Estadual",
+      "uf": "SP",
+      "municipio": null,
+      "titulo": "Brazil: São Paulo | Atlas-Estadão Poll | Governo de São Paulo",
+      "tema": "Aprovação de Governo e Intenção de Voto",
+      "resumo": "Aprovação do governo estadual e preferências eleitorais para o pleito de 2026 em São Paulo, amostra de 2.254 respondentes.",
+      "link_publicacao": "https://www.atlasintel.org/poll/brazil-sao-paulo-atlas-estadao-poll-governo-de-sao-paulo-2026-03-30",
+      "link_relatorio": "https://cdn.atlasintel.org/c410c4d3-96b5-4c31-a901-4070f0726417.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.03 - Estadual SP - Aprovação de Governo e Intenção de Voto",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-03-20",
+      "data_levantamento": "2026-03-16",
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Brazil: Atlas-Estadão Poll | Confiança no judiciário e Imagem dos ministros do STF",
+      "tema": "Confiança no Judiciário",
+      "resumo": "Confiança na instituição judiciária e avaliação da imagem dos ministros do STF, amostra de 2.090 respondentes.",
+      "link_publicacao": "https://www.atlasintel.org/poll/brazil-atlas-estadao-poll-confianca-no-judiciario-e-imagem-dos-ministros-do-stf-2026-03-20",
+      "link_relatorio": "https://cdn.atlasintel.org/a30f0386-b6ce-4862-9007-620cfac470b1.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.03 - Nacional - Confiança no Judiciário",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Atlas Intel",
+      "data_publicacao": "2026-07-03",
+      "data_levantamento": "2026-06-26",
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Latam Pulse: Brazil | June 2026",
+      "tema": "Aprovação Presidencial, Risco Político e Confiança do Consumidor",
+      "resumo": "Aprovação presidencial, avaliação governamental, risco político, polarização social, inflação e confiança do consumidor no Brasil, amostra de 4.999 respondentes.",
+      "link_publicacao": "https://www.atlasintel.org/poll/latam-pulse-brazil-june-2026-2026-07-03",
+      "link_relatorio": "https://cdn.atlasintel.org/c5995b21-30cd-477a-bc0a-1ff01040714d.pdf",
+      "nome_padronizado": "Atlas Intel - 2026.07 - Nacional - Aprovação Presidencial, Risco Político e Confiança do Consumidor",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-07-04",
+      "data_levantamento": null,
+      "abrangencia": "Estadual",
+      "uf": "AL",
+      "municipio": null,
+      "titulo": "Paraná Pesquisas divulga pesquisa no Estado de Alagoas – Registro TSE n.º AL-04491/2026",
+      "tema": "Executivo Federal e Legislativo Federal",
+      "resumo": "Situação eleitoral para o Executivo Federal e Legislativo Federal em Alagoas em 2026.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-registra-pesquisa-no-estado-de-alagoas-para-os-cargos-de-governador-e-senador-registro-tse-n-o-al-04491-2026-julho-2026/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/06/AL_Jul26.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.07 - Estadual AL - Executivo Federal e Legislativo Federal",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-07-02",
+      "data_levantamento": null,
+      "abrangencia": "Estadual",
+      "uf": "RJ",
+      "municipio": null,
+      "titulo": "Paraná Pesquisas divulga pesquisa no Estado do Rio de Janeiro – Registro TSE n.º RJ-04259/2026",
+      "tema": "Executivo Estadual e Legislativo Federal",
+      "resumo": "Situação eleitoral para o Executivo Estadual e Legislativo Federal no Rio de Janeiro e avaliação da administração estadual em 2026.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-registra-pesquisa-no-estado-do-rio-de-janeiro-para-os-cargos-de-governador-e-senador-registro-tse-n-o-rj-04259-2026-julho-2026/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/06/RJ_Jul2026.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.07 - Estadual RJ - Executivo Estadual e Legislativo Federal",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-07-06",
+      "data_levantamento": null,
+      "abrangencia": "Estadual",
+      "uf": "GO",
+      "municipio": null,
+      "titulo": "Paraná Pesquisas divulga pesquisa no Estado de Goiás – Registro TSE n.º GO-01366/2026",
+      "tema": "Executivo Estadual e Legislativo Federal",
+      "resumo": "Situação eleitoral para o Executivo Estadual e Legislativo Federal em Goiás e avaliação da administração estadual em 2026.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-registra-pesquisa-no-estado-de-goias-para-os-cargos-de-governador-e-senador-registro-tse-n-o-go-01366-2026-julho-2026/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/07/GO_Jul26.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.07 - Estadual GO - Executivo Estadual e Legislativo Federal",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-06-24",
+      "data_levantamento": null,
+      "abrangencia": "Estadual",
+      "uf": "TO",
+      "municipio": null,
+      "titulo": "Paraná Pesquisas divulga pesquisa no Estado do Tocantins – Registro TSE n.º TO-07317/2026",
+      "tema": "Executivo Estadual e Legislativo Federal",
+      "resumo": "Situação eleitoral para o Executivo Estadual e Legislativo Federal no Tocantins e avaliação da administração estadual em 2026.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-registra-pesquisa-no-estado-do-tocantins-para-os-cargos-de-governador-e-senador-registro-tse-n-o-to-07317-2026-junho-2026/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/06/TO_Jun26.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.06 - Estadual TO - Executivo Estadual e Legislativo Federal",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-06-19",
+      "data_levantamento": null,
+      "abrangencia": "Estadual",
+      "uf": "SP",
+      "municipio": null,
+      "titulo": "Paraná Pesquisas divulga pesquisa no Estado de São Paulo – Registro TSE n.º SP-08639/2026",
+      "tema": "Executivo Estadual e Legislativo Federal",
+      "resumo": "Situação eleitoral para o Executivo Estadual e Legislativo Federal em São Paulo e avaliação da administração estadual em 2026.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-registra-pesquisa-no-estado-de-sao-paulo-para-os-cargos-de-governador-e-senador-registro-tse-n-o-sp-08639-2026-junho-2026/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/06/SP_Jun26.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.06 - Estadual SP - Executivo Estadual e Legislativo Federal",
+      "adicionado_em": "2026-07-07T23:17:16.056Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-06-15",
+      "data_levantamento": null,
+      "abrangencia": "Estadual",
+      "uf": "AP",
+      "municipio": null,
+      "titulo": "Paraná Pesquisas divulga pesquisa no Estado do Amapá – Registro TSE n.º AP-02175/2026",
+      "tema": "Executivo Estadual e Legislativo Federal",
+      "resumo": "Situação eleitoral para o Executivo Estadual e Legislativo Federal no Amapá e avaliação da administração estadual em 2026.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-registra-pesquisa-no-estado-do-parana-para-os-cargos-de-governador-e-senador-registro-tse-n-o-ap-02175-2026-junho-2026/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/06/AP_Jun26.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.06 - Estadual AP - Executivo Estadual e Legislativo Federal",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-06-10",
+      "data_levantamento": null,
+      "abrangencia": "Estadual",
+      "uf": "PR",
+      "municipio": null,
+      "titulo": "Paraná Pesquisas divulga pesquisa no Estado do Paraná – Registro TSE n.º PR-06978/2026",
+      "tema": "Executivo Estadual e Legislativo Federal",
+      "resumo": "Situação eleitoral para o Executivo Estadual e Legislativo Federal no Paraná em 2026.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-registra-pesquisa-no-estado-do-parana-para-os-cargos-de-governador-e-senador-registro-tse-n-o-pr-06978-2026-junho-2026/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/06/PR_Jun26.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.06 - Estadual PR - Executivo Estadual e Legislativo Federal",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-06-04",
+      "data_levantamento": null,
+      "abrangencia": "Estadual",
+      "uf": "RJ",
+      "municipio": null,
+      "titulo": "Paraná Pesquisas divulga pesquisa no Estado do Rio de Janeiro – Registro TSE n.º RJ-05645/2026",
+      "tema": "Executivo Estadual e Legislativo Federal",
+      "resumo": "Situação eleitoral para o Executivo Estadual e Legislativo Federal no Rio de Janeiro e avaliação da administração estadual em 2026.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-registra-pesquisa-no-estado-do-rio-de-janeiro-para-os-cargos-de-governador-e-senador-registro-tse-n-o-rj-05645-2026-junho-2026/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/06/RJ_Jun26.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.06 - Estadual RJ - Executivo Estadual e Legislativo Federal",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-06-03",
+      "data_levantamento": null,
+      "abrangencia": "Estadual",
+      "uf": "AC",
+      "municipio": null,
+      "titulo": "Paraná Pesquisas divulga pesquisa no Estado do Acre – Registro TSE n.º AC-01182/2026",
+      "tema": "Executivo Estadual e Legislativo Federal",
+      "resumo": "Situação eleitoral para o Executivo Estadual e Legislativo Federal no Acre e avaliação da administração estadual em 2026.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-registra-pesquisa-no-estado-do-acre-para-os-cargos-de-governador-e-senador-registro-tse-n-o-ac-01182-2026-junho-2026/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/06/AC_Jun26.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.06 - Estadual AC - Executivo Estadual e Legislativo Federal",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-05-29",
+      "data_levantamento": null,
+      "abrangencia": "Municipal",
+      "uf": "PR",
+      "municipio": "Curitiba",
+      "titulo": "Paraná Pesquisas divulga pesquisa no Município de Curitiba – Sobre a avaliação da administração Municipal – Maio/2026",
+      "tema": "Avaliação da Administração Municipal",
+      "resumo": "Pesquisa de opinião pública sobre a avaliação da administração municipal de Curitiba.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-divulga-pesquisa-no-municupio-de-curitiba-sobre-a-avaliacao-da-administracao-municipal-maio-2026/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/05/Curitiba_Mai26.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.05 - Municipal Curitiba - Avaliação da Administração Municipal",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-05-21",
+      "data_levantamento": null,
+      "abrangencia": "Estadual",
+      "uf": "SP",
+      "municipio": null,
+      "titulo": "Paraná Pesquisas divulga pesquisa no Estado de São Paulo – Registro TSE n.º SP-02706/2026",
+      "tema": "Executivo Estadual e Legislativo Federal",
+      "resumo": "Situação eleitoral para o Executivo Estadual e Legislativo Federal em São Paulo e avaliação da administração estadual em 2026.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-registra-pesquisa-no-estado-de-sao-paulo-para-os-cargos-de-governador-e-senador-registro-tse-n-o-sp-02706-2026-maio-2026/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/05/SP_Mai26-Estadual.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.05 - Estadual SP - Executivo Estadual e Legislativo Federal",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Paraná Pesquisas",
+      "data_publicacao": "2026-05-18",
+      "data_levantamento": null,
+      "abrangencia": "Estadual",
+      "uf": "GO",
+      "municipio": null,
+      "titulo": "Paraná Pesquisas divulga pesquisa no Estado de Goiás – Registro TSE n.º GO-02070/2026",
+      "tema": "Executivo Estadual e Legislativo Federal",
+      "resumo": "Situação eleitoral para o Executivo Estadual e Legislativo Federal em Goiás e avaliação da administração estadual em 2026.",
+      "link_publicacao": "https://paranapesquisas.com.br/pesquisas/parana-pesquisas-divulga-pesquisa-no-estado-de-goias-registro-tse-n-o-go-02070-2026-situacao-eleitoral-para-o-executivo-estadual-e-legislativo-federal-em-2026-e-avaliacao-da-admini/",
+      "link_relatorio": "https://paranapesquisas.com.br/wp-content/uploads/2026/05/GO_Mai26.pdf",
+      "nome_padronizado": "Paraná Pesquisas - 2026.05 - Estadual GO - Executivo Estadual e Legislativo Federal",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-06",
+      "data_levantamento": null,
+      "abrangencia": "Estadual",
+      "uf": "MG",
+      "municipio": null,
+      "titulo": "Para além do dial: rádio 3.0 e sua relação com Minas Gerais – Junho/2026",
+      "tema": "Hábitos de Consumo de Rádio",
+      "resumo": "Pesquisa sobre hábitos de consumo de rádio e sua relação com o público de Minas Gerais.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/06/APREVENTOABERTJUNHO26VF-ENVIO.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/06/APREVENTOABERTJUNHO26VF-ENVIO.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.06 - Estadual MG - Hábitos de Consumo de Rádio",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-06",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Pesquisa Genial – Direção do país – Junho/2026",
+      "tema": "Direção do País",
+      "resumo": "Rastreamento Genial/Quaest sobre a percepção dos brasileiros quanto à direção do país em junho de 2026.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/06/7.GENIALQUAESTJUN26DIRECAODOPAIS.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/06/7.GENIALQUAESTJUN26DIRECAODOPAIS.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.06 - Nacional - Direção do País",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-06",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Pesquisa Genial – Antipetismo e antibolsonarismo – Junho/2026",
+      "tema": "Antipetismo e Antibolsonarismo",
+      "resumo": "Pesquisa Genial/Quaest sobre os níveis de rejeição ao PT e ao bolsonarismo entre os brasileiros.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/06/9.GENIALQUAESTJUN26ANTIPETISMOATIBOLSONARISMO.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/06/9.GENIALQUAESTJUN26ANTIPETISMOATIBOLSONARISMO.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.06 - Nacional - Antipetismo e Antibolsonarismo",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-06",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Pesquisa Genial – Influência dos EUA nas eleições brasileiras – Junho/2026",
+      "tema": "Influência dos EUA nas Eleições",
+      "resumo": "Pesquisa Genial/Quaest sobre a percepção da influência dos Estados Unidos nas eleições brasileiras de 2026.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/06/8.GENIALQUAESTJUN26INFLUÊNCIADOSEUANASELEIÇÕESNOBRASIL.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/06/8.GENIALQUAESTJUN26INFLUÊNCIADOSEUANASELEIÇÕESNOBRASIL.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.06 - Nacional - Influência dos EUA nas Eleições",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-06",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Pesquisa Genial – Candidatura de Flávio Bolsonaro – Junho/2026",
+      "tema": "Candidatura de Flávio Bolsonaro",
+      "resumo": "Pesquisa Genial/Quaest sobre a percepção dos brasileiros a respeito de uma candidatura de Flávio Bolsonaro.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/06/4.GENIALQUAESTJUN26CANDIDATURAFLAVIO.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/06/4.GENIALQUAESTJUN26CANDIDATURAFLAVIO.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.06 - Nacional - Candidatura de Flávio Bolsonaro",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-06",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Pesquisa Genial – Affordability: renda x custo de vida – Junho/2026",
+      "tema": "Renda e Custo de Vida",
+      "resumo": "Pesquisa Genial/Quaest sobre a relação entre renda e custo de vida percebida pelos brasileiros.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/06/6.GENIALQUAESTJUN26AFFORDABILITYTEMÁTICO.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/06/6.GENIALQUAESTJUN26AFFORDABILITYTEMÁTICO.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.06 - Nacional - Renda e Custo de Vida",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-06",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Pesquisa Genial – Segunda opção de voto no 1º turno – Junho/2026",
+      "tema": "Segunda Opção de Voto",
+      "resumo": "Pesquisa Genial/Quaest sobre a segunda opção de voto dos eleitores para o primeiro turno das eleições de 2026.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/06/5.GENIALQUAESTJUN26SEGUNDAOPÇÃOVOTO.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/06/5.GENIALQUAESTJUN26SEGUNDAOPÇÃOVOTO.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.06 - Nacional - Segunda Opção de Voto",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-06",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Pesquisa Genial – O papel de Lula nas próximas eleições – Junho/2026",
+      "tema": "Papel de Lula nas Eleições",
+      "resumo": "Pesquisa Genial/Quaest sobre o papel percebido de Lula nas próximas eleições presidenciais.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/06/2.GENIALQUAESTJUN26MERECELULA.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/06/2.GENIALQUAESTJUN26MERECELULA.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.06 - Nacional - Papel de Lula nas Eleições",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-06",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Pesquisa Genial – Razão do voto em Lula e Flávio Bolsonaro",
+      "tema": "Razão do Voto",
+      "resumo": "Pesquisa Genial/Quaest sobre as razões declaradas pelos eleitores para votar em Lula ou em Flávio Bolsonaro.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/06/3.GENIALQUAESTJUN26RAZÃOVOTOLULAFLÁVIO.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/06/3.GENIALQUAESTJUN26RAZÃOVOTOLULAFLÁVIO.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.06 - Nacional - Razão do Voto",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-06",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Pesquisa Genial – Relação do Brasil com os EUA – Junho/2026",
+      "tema": "Relação do Brasil com os EUA",
+      "resumo": "Pesquisa Genial/Quaest sobre a percepção dos brasileiros a respeito da relação do Brasil com os Estados Unidos.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/06/1.GENIALQUAESTJUN26RELAÇÃOBRASILEUA.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/06/1.GENIALQUAESTJUN26RELAÇÃOBRASILEUA.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.06 - Nacional - Relação do Brasil com os EUA",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-06",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Pesquisa nacional – Copa do Mundo 2026 – Junho/2026",
+      "tema": "Percepção sobre a Copa do Mundo 2026",
+      "resumo": "Pesquisa Quaest sobre a percepção e expectativas dos brasileiros em relação à Copa do Mundo de 2026.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/06/QUAESTJUN26COPADOMUNDO.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/06/QUAESTJUN26COPADOMUNDO.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.06 - Nacional - Percepção sobre a Copa do Mundo 2026",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-06",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Pesquisa Genial – Pesquisa eleitoral para presidente – Junho/2026",
+      "tema": "Intenção de Voto para Presidente",
+      "resumo": "Pesquisa Genial/Quaest sobre o cenário eleitoral para presidente em junho de 2026.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/06/GENIALQUAESTJUN26.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/06/GENIALQUAESTJUN26.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.06 - Nacional - Intenção de Voto para Presidente",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-06",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "As quadrilhas juninas no Brasil – Junho/2026",
+      "tema": "Hábitos e Percepção sobre Quadrilhas Juninas",
+      "resumo": "Pesquisa Quaest sobre hábitos e percepção dos brasileiros em relação às quadrilhas juninas.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/06/QUAESTRELATORIOYOUTUBEQUADRILHASCOMPLETOv6.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/06/QUAESTRELATORIOYOUTUBEQUADRILHASCOMPLETOv6.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.06 - Nacional - Hábitos e Percepção sobre Quadrilhas Juninas",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-03",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Pesquisa Genial – Classe socioeconômica – Março/2026",
+      "tema": "Classe Socioeconômica e Consumo",
+      "resumo": "Pesquisa Genial/Quaest sobre classe socioeconômica e hábitos de consumo dos brasileiros.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/05/GENIALQUAESTMAR26CONSUMO.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/05/GENIALQUAESTMAR26CONSUMO.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.03 - Nacional - Classe Socioeconômica e Consumo",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    },
+    {
+      "instituto": "Genial Quaest",
+      "data_publicacao": "2026-05",
+      "data_levantamento": null,
+      "abrangencia": "Nacional",
+      "uf": null,
+      "municipio": null,
+      "titulo": "Pesquisa Genial – PL da dosimetria – Maio/2026",
+      "tema": "PL da Dosimetria",
+      "resumo": "Pesquisa Genial/Quaest sobre a opinião pública a respeito do Projeto de Lei da dosimetria das penas.",
+      "link_publicacao": "https://quaest.com.br/wp-content/uploads/2026/05/9.GENIALQUAESTMAI26PLDADOSIMETRIA.pdf",
+      "link_relatorio": "https://quaest.com.br/wp-content/uploads/2026/05/9.GENIALQUAESTMAI26PLDADOSIMETRIA.pdf",
+      "nome_padronizado": "Genial Quaest - 2026.05 - Nacional - PL da Dosimetria",
+      "adicionado_em": "2026-07-07T23:17:16.057Z"
+    }
+  ]
+};
+
+const MESES = ["", "jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+
+function fmtDate(iso) {
+  if (!iso) return "—";
+  const parts = iso.split("-");
+  if (parts.length === 3) {
+    const [y, m, d] = parts;
+    return `${d}/${m}/${y.slice(2)}`;
+  }
+  if (parts.length === 2) {
+    const [y, m] = parts;
+    return `${MESES[parseInt(m, 10)]}/${y.slice(2)}`;
+  }
+  return iso;
+}
+
+function scopeLabel(p) {
+  if (p.abrangencia === "Estadual") return `Estadual · ${p.uf || "?"}`;
+  if (p.abrangencia === "Municipal") return `Municipal · ${p.municipio || ""}${p.uf ? " / " + p.uf : ""}`;
+  return "Nacional";
+}
+
+function monthKey(iso) {
+  return iso ? iso.slice(0, 7) : "0000-00";
+}
+
+function monthLabel(key) {
+  const [y, m] = key.split("-");
+  const idx = parseInt(m, 10);
+  return `${MESES[idx] || m} ${y}`;
+}
+
+const institutos = [...new Set(DATA.pesquisas.map(p => p.instituto))];
+const mesesDisponiveis = [...new Set(DATA.pesquisas.map(p => monthKey(p.data_publicacao)))].sort().reverse();
+const abrangencias = ["Nacional", "Estadual", "Municipal"].filter(a => DATA.pesquisas.some(p => p.abrangencia === a));
+const ufsDisponiveis = [...new Set(DATA.pesquisas.map(p => p.uf).filter(Boolean))].sort();
+
+let activeFilters = new Set(institutos);
+let activeMeses = new Set(mesesDisponiveis);
+let activeAbrangencias = new Set(abrangencias);
+let selectedUF = "";
+
+function renderStats() {
+  const row = document.getElementById("statsRow");
+  const total = DATA.pesquisas.length;
+  const counts = {};
+  institutos.forEach(i => counts[i] = 0);
+  DATA.pesquisas.forEach(p => counts[p.instituto]++);
+
+  const cssVar = {
+    "Atlas Intel": "--i-atlas",
+    "Paraná Pesquisas": "--i-parana",
+    "IPSOS IPEC": "--i-ipsos",
+    "Genial Quaest": "--i-quaest",
+  };
+
+  let html = `<div class="stat-tile"><div class="num">${total}</div><div class="label">Total de pesquisas</div></div>`;
+  institutos.forEach(inst => {
+    const v = cssVar[inst] || "--accent";
+    html += `<div class="stat-tile" style="--stripe: var(${v})"><div class="num">${counts[inst]}</div><div class="label">${inst}</div></div>`;
+  });
+  row.innerHTML = html;
+}
+
+function renderFilters() {
+  const instGroup = document.getElementById("filterInstituto");
+  institutos.forEach(inst => {
+    const btn = document.createElement("button");
+    btn.className = "chip active";
+    btn.dataset.inst = inst;
+    btn.textContent = inst;
+    btn.addEventListener("click", () => {
+      if (activeFilters.has(inst)) {
+        activeFilters.delete(inst);
+        btn.classList.remove("active");
+      } else {
+        activeFilters.add(inst);
+        btn.classList.add("active");
+      }
+      renderFeed();
+    });
+    instGroup.appendChild(btn);
+  });
+
+  const mesGroup = document.getElementById("filterMes");
+  mesesDisponiveis.forEach(key => {
+    const btn = document.createElement("button");
+    btn.className = "chip active";
+    btn.textContent = monthLabel(key);
+    btn.addEventListener("click", () => {
+      if (activeMeses.has(key)) {
+        activeMeses.delete(key);
+        btn.classList.remove("active");
+      } else {
+        activeMeses.add(key);
+        btn.classList.add("active");
+      }
+      renderFeed();
+    });
+    mesGroup.appendChild(btn);
+  });
+
+  const abrGroup = document.getElementById("filterAbrangencia");
+  abrangencias.forEach(ab => {
+    const btn = document.createElement("button");
+    btn.className = "chip active";
+    btn.textContent = ab;
+    btn.addEventListener("click", () => {
+      if (activeAbrangencias.has(ab)) {
+        activeAbrangencias.delete(ab);
+        btn.classList.remove("active");
+      } else {
+        activeAbrangencias.add(ab);
+        btn.classList.add("active");
+      }
+      renderFeed();
+    });
+    abrGroup.appendChild(btn);
+  });
+
+  const ufSelect = document.getElementById("filterUF");
+  ufsDisponiveis.forEach(uf => {
+    const opt = document.createElement("option");
+    opt.value = uf;
+    opt.textContent = uf;
+    ufSelect.appendChild(opt);
+  });
+  ufSelect.addEventListener("change", () => {
+    selectedUF = ufSelect.value;
+    renderFeed();
+  });
+
+  document.getElementById("clearFilters").addEventListener("click", () => {
+    activeFilters = new Set(institutos);
+    activeMeses = new Set(mesesDisponiveis);
+    activeAbrangencias = new Set(abrangencias);
+    selectedUF = "";
+    ufSelect.value = "";
+    document.querySelectorAll(".chip").forEach(c => c.classList.add("active"));
+    renderFeed();
+  });
+}
+
+function renderFeed() {
+  const feed = document.getElementById("feed");
+  const filtered = DATA.pesquisas.filter(p =>
+    activeFilters.has(p.instituto) &&
+    activeMeses.has(monthKey(p.data_publicacao)) &&
+    activeAbrangencias.has(p.abrangencia) &&
+    (!selectedUF || p.uf === selectedUF)
+  );
+
+  document.getElementById("totalFoot").textContent = `${filtered.length} de ${DATA.pesquisas.length} exibidas`;
+
+  if (filtered.length === 0) {
+    feed.innerHTML = `<div class="empty-state">Nenhuma pesquisa para os filtros selecionados.</div>`;
+    return;
+  }
+
+  const groups = {};
+  filtered.forEach(p => {
+    const k = monthKey(p.data_publicacao);
+    if (!groups[k]) groups[k] = [];
+    groups[k].push(p);
+  });
+
+  const sortedKeys = Object.keys(groups).sort().reverse();
+
+  let html = "";
+  sortedKeys.forEach(key => {
+    const items = groups[key].sort((a, b) => (b.data_publicacao || "").localeCompare(a.data_publicacao || ""));
+    html += `<div class="month-group">`;
+    html += `<div class="month-heading">${monthLabel(key)} <span class="count">${items.length} pesquisa${items.length > 1 ? "s" : ""}</span></div>`;
+    items.forEach(p => {
+      html += `<article class="poll-card" data-inst="${p.instituto}">`;
+      html += `<div class="poll-top">`;
+      html += `<div class="badges">`;
+      html += `<span class="badge-inst">${p.instituto}</span>`;
+      html += `<span class="badge-scope">${scopeLabel(p)}</span>`;
+      html += `</div>`;
+      html += `<span class="poll-date">${fmtDate(p.data_publicacao)}</span>`;
+      html += `</div>`;
+      html += `<div class="poll-title">${p.titulo}</div>`;
+      html += `<div class="poll-tema">${p.tema}</div>`;
+      html += `<div class="poll-resumo">${p.resumo || ""}</div>`;
+      html += `<div class="poll-links">`;
+      if (p.link_publicacao) html += `<a href="${p.link_publicacao}" target="_blank" rel="noopener">Página da pesquisa →</a>`;
+      if (p.link_relatorio && p.link_relatorio !== p.link_publicacao) html += `<a href="${p.link_relatorio}" target="_blank" rel="noopener">Relatório (PDF) →</a>`;
+      if (!p.link_publicacao && !p.link_relatorio) html += `<span class="na">Sem link confirmado</span>`;
+      html += `</div>`;
+      html += `</article>`;
+    });
+    html += `</div>`;
+  });
+  feed.innerHTML = html;
+}
+
+document.getElementById("lastSync").textContent = new Date(DATA.last_sync).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
+
+renderStats();
+renderFilters();
+renderFeed();
+</script>
